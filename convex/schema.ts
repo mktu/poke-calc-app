@@ -13,5 +13,14 @@ export default defineSchema({
         name: v.string()
     }).searchIndex("search_name", {
         searchField: "name"
-    })
+    }),
+    images: defineTable({
+        name: v.string(),
+        src: v.string(),
+    }),
+    ranking: defineTable({
+        name: v.string(),
+        pokeId: v.string(),
+        rank: v.float64(),
+    }),
 });

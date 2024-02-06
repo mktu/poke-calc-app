@@ -4,7 +4,7 @@ import { v } from "convex/values";
 export const getList = query({
     args: {},
     handler: async (ctx) => {
-        return await ctx.db.query("pokemon").take(100);
+        return await ctx.db.query("pokemon").collect();
     },
 });
 
