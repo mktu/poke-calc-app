@@ -1,5 +1,5 @@
 "use client"
-import { usePokeCalc } from "@/hooks/usePokeCalc";
+import { usePokeCalc } from "@/hooks/use-poke-calc";
 import PokemonSelector from "./_components/pokemon-selector";
 import Parameters from './_components/parameters'
 

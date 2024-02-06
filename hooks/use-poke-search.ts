@@ -2,7 +2,7 @@
 import { api } from "@/convex/_generated/api";
 import { toKatakana } from 'wanakana'
 import { useQuery } from "convex/react";
-import { ChangeEvent, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
 export const usePokeSearch = () => {
     const [searchname, setSearchName] = useState('')

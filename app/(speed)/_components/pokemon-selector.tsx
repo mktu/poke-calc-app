@@ -1,6 +1,6 @@
 "use client"
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
-import { usePokeSearch } from "@/hooks/usePokeSearch"
+import { usePokeSearch } from "@/hooks/use-poke-search"
 import { Doc } from "@/convex/_generated/dataModel";
 import { FC, useCallback, useRef, useState } from "react"
 
