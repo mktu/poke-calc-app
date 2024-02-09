@@ -2,6 +2,8 @@
 import { usePokeCalc } from "@/hooks/use-poke-calc";
 import PokemonSelector from "./_components/pokemon-selector";
 import Parameters from './_components/parameters'
+import { useSpeedSettingContext } from "@/components/providers/speed-setting-provider";
+import Ranking from "./_components/ranking";
 
 const SpeedPage: React.FC = () => {
   const { selected,
@@ -14,6 +16,7 @@ const SpeedPage: React.FC = () => {
     onChangeTargetParams,
     onCalcTargetPlus1
   } = usePokeCalc()
+  const { mode } = useSpeedSettingContext()
   return (
     <div className="flex w-full gap-2 p-4">
       <div className="flex flex-1 flex-col justify-start">
@@ -22,8 +25,15 @@ const SpeedPage: React.FC = () => {
       </div>
       <div className="min-h-[250px] w-[1px] self-stretch bg-border" />
       <div className="flex-1">
-        <PokemonSelector onSelect={onSelectTarget} selected={target} />
-        {target && <Parameters pokemon={target} parameters={targetParams} onChangeParam={onChangeTargetParams} />}
+        {mode === 'vs' ? (
+          <>
+            <PokemonSelector onSelect={onSelectTarget} selected={target} />
+            {target && <Parameters pokemon={target} parameters={targetParams} onChangeParam={onChangeTargetParams} />}
+          </>
+        ) : (
+          selected && <Ranking selected={selected} parameters={myParams} />
+        )}
+
       </div>
     </div>
   )

@@ -2,7 +2,7 @@ import { api } from "@/convex/_generated/api";
 import { linkRankToPokemon } from "@/logics/rank";
 import { ConvexHttpClient } from "convex/browser";
 import { FC } from "react";
-import Ranks from "./_components/Ranks";
+import Ranks from "./_components/ranks";
 
 if (!process.env["NEXT_PUBLIC_CONVEX_URL"]) {
     console.error('env variables is not defined for convex')

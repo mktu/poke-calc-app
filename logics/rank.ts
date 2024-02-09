@@ -5,11 +5,12 @@ export const linkRankToPokemon = (pokemons: Doc<'pokemon'>[], rankins: Doc<'rank
         if (r.pokeId) {
             return r
         }
-        const p = pokemons.find(p => p.name === r.name)
-        if (p) {
+        const p = pokemons.filter(p => p.no === r.no)
+        if (p.length === 1) {
             return {
                 ...r,
-                pokeId: p._id,
+                pokeId: p[0]._id,
+                s: p[0].s
             }
         }
         return r

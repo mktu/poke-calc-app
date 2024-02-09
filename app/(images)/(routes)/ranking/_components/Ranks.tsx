@@ -2,7 +2,7 @@
 
 import { Doc } from "@/convex/_generated/dataModel"
 import { FC, useState } from "react"
-import EditRank from "./EditRank"
+import EditRank from "./edit-rank"
 import { Button } from "@/components/ui/button"
 import { copyToClipboard } from "@/lib/clipboard"
 import { toast } from "sonner";
@@ -23,17 +23,21 @@ const Ranks: FC<Props> = ({
                 <div className="flex items-center gap-2" key={v._id}>
                     <div className="text-muted-foreground">{v.rank}</div>
                     <div className="">{v.name}</div>
-                    <div className="text-sm text-muted-foreground">{v._id}</div>
+                    {v.s === 0 && (
+                        <div className="text-destructive">⚠️未設定</div>
+                    )}
 
                     <EditRank
                         pokemons={pokemons}
+                        targetNo={v.no}
                         onSelectPokemon={(pokemon) => {
                             setPokemonsWithRank(before => before.map(r => {
                                 if (r.rank === v.rank) {
                                     return {
                                         ...r,
                                         pokeId: pokemon._id,
-                                        name: pokemon.name
+                                        name: pokemon.name,
+                                        s: pokemon.s
                                     }
                                 }
                                 return r
@@ -46,7 +50,9 @@ const Ranks: FC<Props> = ({
                 copyToClipboard(pokemonsWithRank.map(v => ({
                     name: v.name,
                     pokeId: v.pokeId,
-                    rank: v.rank
+                    rank: v.rank,
+                    s: v.s,
+                    no: v.no
                 })))
                 toast.success('クリップボードにコピーしました!')
             }}>COPY</Button>

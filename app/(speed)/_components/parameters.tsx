@@ -44,11 +44,14 @@ const Parameters: FC<Props> = ({
         value: parameters.weather,
         onChange: (checked: boolean) => onChangeParam({ ...parameters, weather: checked })
     }]
+    const speed = calcSpeed(parameters)
+    const paramsOnlyEvs: SpeedParams = { ...parameters, scarf: false, paralysis: false, tailwind: false, weather: false, rank: 0, nature: 'none' }
+    const speedOnlyEvs = calcSpeed(paramsOnlyEvs)
     return (
         <div className="flex w-full flex-col gap-4 p-2">
             <div className="flex items-center gap-4">
                 <div className='text-muted-foreground'>種族値: {pokemon.s}</div>
-                <div className='text-muted-foreground'>実数値: {calcSpeed(parameters)}</div>
+                <div className='text-muted-foreground'>実数値: {speed}</div>
             </div>
             <div className='flex items-center gap-4'>
                 {booleanValues.map(v => (
@@ -63,17 +66,24 @@ const Parameters: FC<Props> = ({
             <div className="flex items-end gap-1">
                 <div>
                     <label className='text-sm text-muted-foreground' htmlFor="evs">努力値</label>
-                    <Input className="w-auto" id='evs' type='number' value={parameters.evs} onChange={(e) => {
+                    <Input className="w-auto" id='evs' type='number' min={0} max={252} value={parameters.evs} onChange={(e) => {
                         const num = Number(e.target.value)
                         onChangeParam({ ...parameters, evs: num })
                     }} />
                 </div>
-                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, evs: parameters.evs + 1 })}>
-                    <PlusIcon className="size-4" />
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, evs: 0 })}>
+                    0
                 </Button>
-                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, evs: parameters.evs - 1 })}>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, evs: calcEvs(paramsOnlyEvs, speedOnlyEvs - 1) })}>
                     <MinusIcon className="size-4" />
                 </Button>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, evs: calcEvs(paramsOnlyEvs, speedOnlyEvs + 1) })}>
+                    <PlusIcon className="size-4" />
+                </Button>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, evs: 252 })}>
+                    252
+                </Button>
+
                 {onCalcTargetPlus1 && (
                     <Button onClick={onCalcTargetPlus1}>
                         相手+1

@@ -9,7 +9,7 @@ export default defineSchema({
         d: v.number(),
         h: v.number(),
         s: v.number(),
-        img: v.string(),
+        no: v.number(),
         name: v.string()
     }).searchIndex("search_name", {
         searchField: "name"
@@ -22,5 +22,7 @@ export default defineSchema({
         name: v.string(),
         pokeId: v.string(),
         rank: v.float64(),
+        no: v.number(),
+        s: v.number()
     }),
 });

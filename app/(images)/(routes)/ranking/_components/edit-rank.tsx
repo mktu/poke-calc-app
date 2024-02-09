@@ -9,13 +9,14 @@ import { toKatakana } from "wanakana"
 
 type Props = {
     pokemons: Doc<'pokemon'>[],
-    onSelectPokemon: (pokemon: Doc<'pokemon'>) => void
-
+    onSelectPokemon: (pokemon: Doc<'pokemon'>) => void,
+    targetNo: number
 }
 
 const EditRank: FC<Props> = ({
     pokemons,
-    onSelectPokemon
+    onSelectPokemon,
+    targetNo
 }) => {
     const [open, setOpen] = useState(false)
     return (
@@ -40,7 +41,7 @@ const EditRank: FC<Props> = ({
                     <CommandInput placeholder="Search framework..." className="h-9" />
                     <CommandEmpty>No framework found.</CommandEmpty>
                     <CommandGroup>
-                        {pokemons.map((pokemon) => (
+                        {pokemons.filter(pokemon => pokemon.no === targetNo).map((pokemon) => (
                             <CommandItem
                                 key={pokemon._id}
                                 value={pokemon.name}
