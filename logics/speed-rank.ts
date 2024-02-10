@@ -73,5 +73,5 @@ export const calcSpeedRanking = (selected: Doc<'pokemon'>, parameters: SpeedPara
             type: 'fastest'
         })
     })
-    return ranks.sort((v1, v2) => v1.speed - v2.speed).map((v, idx) => ({ ...v, speedRank: idx + 1 }))
+    return ranks.sort((v1, v2) => v2.speed - v1.speed).map((v, idx) => ({ ...v, speedRank: idx + 1 }))
 }
