@@ -27,7 +27,7 @@ const RankFilter: FC<Props> = ({
                 </Button>
             </div>
             <div className="flex items-center gap-1">
-                <Label htmlFor="rankFilter" className="whitespace-nowrap text-muted-foreground">上位⚪︎位まで表示</Label>
+                <Label htmlFor="rankFilter" className="whitespace-nowrap text-muted-foreground">使用率上位⚪︎位まで表示</Label>
                 <Input className="w-auto" id='rankFilter' type="number" min={0} max={100} value={rankFilter.rankFilter} onChange={(e) => {
                     onChangeFilter({
                         rankFilter: Number(e.target.value)

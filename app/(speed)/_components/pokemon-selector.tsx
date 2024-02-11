@@ -15,7 +15,7 @@ const PokemonSelector: FC<Props> = ({
 }) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [open, setOpen] = useState(false);
-    const { onInputChange, pokemons, inputText } = usePokeSearch()
+    const { onInputChange, pokemons, inputText } = usePokeSearch(selected?.name)
     const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
         const input = inputRef.current
         if (input) {

@@ -10,15 +10,17 @@ import { FC } from "react"
 type Props = {
     pokemon: Doc<'pokemon'>,
     parameters: SpeedParams,
+    speed: number,
     onChangeParam: (parameters: SpeedParams) => void
-    onCalcTargetPlus1?: () => void
+    onCalcTargetPlus1?: () => void,
 }
 
 const Parameters: FC<Props> = ({
     pokemon,
     parameters,
+    speed,
     onChangeParam,
-    onCalcTargetPlus1
+    onCalcTargetPlus1,
 }) => {
     const booleanValues = [{
         label: 'スカーフ',
@@ -44,7 +46,6 @@ const Parameters: FC<Props> = ({
         value: parameters.weather,
         onChange: (checked: boolean) => onChangeParam({ ...parameters, weather: checked })
     }]
-    const speed = calcSpeed(parameters)
     const paramsOnlyEvs: SpeedParams = { ...parameters, scarf: false, paralysis: false, tailwind: false, weather: false, rank: 0, nature: 'none' }
     const speedOnlyEvs = calcSpeed(paramsOnlyEvs)
     return (

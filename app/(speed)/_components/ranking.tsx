@@ -43,11 +43,11 @@ const Presenter: FC<{
                         ) : (
                             <li className="flex items-center gap-2">
                                 <div className={`font-semibold ${v.type === 'none' ? 'text-muted-foreground' :
-                                    v.type === 'fastest' ? 'text-red-500' :
-                                        v.type === 'second-speed' ? 'text-blue-500' : ''
+                                    v.type === 'fastest' ? 'text-red-400' :
+                                        v.type === 'second-speed' ? 'text-blue-400' : ''
                                     }`}>{SpeedTypeLabel[v.type]}</div>
                                 <div className="text-muted-foreground">{v.name}</div>
-                                <div>({v.speed})</div>
+                                <div className="text-muted-foreground">({v.speed})</div>
                             </li>
                         )}
                     </Fragment>

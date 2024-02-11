@@ -1,6 +1,6 @@
 import { Doc } from "@/convex/_generated/dataModel"
 import { SpeedParams, calcEvs, calcSpeed, initialParams } from "@/logics/calc"
-import { useCallback, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 
 export const usePokeCalc = () => {
     const [selected, setSelected] = useState<Doc<'pokemon'>>()
@@ -40,6 +40,8 @@ export const usePokeCalc = () => {
     }, [myParams, targetParams])
     const onChangeTargetParams = setTargetParams
     const onChangeMyParams = setMyParams
+    const targetSpeed = useMemo(() => calcSpeed(targetParams), [targetParams])
+    const mySpeed = useMemo(() => calcSpeed(myParams), [myParams])
     return {
         onSelectMyPokemon,
         onSelectTarget,
@@ -49,6 +51,8 @@ export const usePokeCalc = () => {
         myParams,
         targetParams,
         selected,
-        target
+        target,
+        targetSpeed,
+        mySpeed
     }
 }
