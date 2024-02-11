@@ -17,7 +17,8 @@ const SpeedPage: React.FC = () => {
     mySpeed,
     onChangeMyParams,
     onChangeTargetParams,
-    onCalcTargetPlus1
+    onCalcTargetPlus1,
+    onCalcPlus1
   } = usePokeCalc()
   return (
     <div className="flex w-full gap-2 p-4">
@@ -48,7 +49,7 @@ const SpeedPage: React.FC = () => {
               onChangeParam={onChangeTargetParams} />}
           </TabsContent>
           <TabsContent value='ranking'>
-            {selected && <Ranking selected={selected} parameters={myParams} />}
+            {selected && <Ranking onCalcPlus1={onCalcPlus1} selected={selected} parameters={myParams} />}
           </TabsContent>
         </Tabs>
       </div>

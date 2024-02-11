@@ -63,24 +63,32 @@ export const calcSpeed = ({
     ) * (50.0 / 100.0) + 5) * natureCorretion) * correctionRank) * equipmentCorrection) * paralysisCorrection)
 }
 
-export const calcEvs = ({
-    scarf,
-    paralysis,
-    tailwind,
-    weather,
-    ivs,
-    baseStats,
-    nature,
-    rank
-}: SpeedParams, targetSpeed: number) => {
-    const weatherCorrection = weather ? 2.0 : 1.0;
-    const tailWondCorrection = tailwind ? 2.0 : 1.0;
+export const calcEvs = (prm: SpeedParams, targetSpeed: number): number => {
+    const {
+        scarf,
+        paralysis,
+        tailwind,
+        weather,
+        ivs,
+        baseStats,
+        nature,
+        rank
+    } = prm;
+    const weatherCorrection = weather ? 8192.0 / 4096 : 1.0;
+    const tailWondCorrection = tailwind ? 8192.0 / 4096 : 1.0;
     const paralysisCorrection = paralysis ? 0.5 : 1.0;
-    const scarfCorrection = scarf ? 3.0 / 2 : 1.0;
-    const equipmentCorrection = weatherCorrection * tailWondCorrection * paralysisCorrection * scarfCorrection;
+    const scarfCorrection = scarf ? 6144.0 / 4096 : 1.0;
+    const equipmentCorrection = weatherCorrection * tailWondCorrection * scarfCorrection;
     const natureCorretion = nature === 'up' ? 1.1 : nature === 'down' ? 0.9 : 1.0
     const correctionRank = rankCorrectionFactor[String(rank)]
-    return Math.min(252, Math.max(0, Math.ceil(((
-        targetSpeed * 1.0 / correctionRank / natureCorretion / equipmentCorrection - 5
+    const ret = Math.min(252, Math.max(0, Math.ceil(((
+        targetSpeed * 1.0 / paralysisCorrection / equipmentCorrection / correctionRank / natureCorretion - 5
     ) / (50.0 / 100.0) - ivs - baseStats * 2.0) * 4.0)));
+    if (ret < 252 && targetSpeed > calcSpeed({
+        ...prm,
+        evs: ret
+    })) {
+        return calcEvs(prm, targetSpeed + 1)
+    }
+    return ret
 }

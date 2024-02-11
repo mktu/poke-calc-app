@@ -11,15 +11,18 @@ import { MenuIcon } from "lucide-react"
 
 type Props = {
     selected: Doc<'pokemon'>,
-    parameters: SpeedParams
+    parameters: SpeedParams,
+    onCalcPlus1: (target: number) => void
 }
 
 const Presenter: FC<{
     speedRanks: SpeedRank[],
-    selectedSpeed: number
+    selectedSpeed: number,
+    onCalcPlus1: (target: number) => void
 }> = ({
     speedRanks,
-    selectedSpeed
+    selectedSpeed,
+    onCalcPlus1
 }) => {
         const selectedRef = useRef<HTMLLIElement>(null)
         useEffect(() => {
@@ -41,13 +44,18 @@ const Presenter: FC<{
                                 <div>({v.speed})</div>
                             </li>
                         ) : (
-                            <li className="flex items-center gap-2">
+                            <li className="group flex items-center gap-2 hover:bg-stone-50">
                                 <div className={`font-semibold ${v.type === 'none' ? 'text-muted-foreground' :
                                     v.type === 'fastest' ? 'text-red-400' :
                                         v.type === 'second-speed' ? 'text-blue-400' : ''
                                     }`}>{SpeedTypeLabel[v.type]}</div>
                                 <div className="text-muted-foreground">{v.name}</div>
                                 <div className="text-muted-foreground">({v.speed})</div>
+                                <Button
+                                    onClick={() => {
+                                        onCalcPlus1(v.speed)
+                                    }}
+                                    className="ml-auto hidden h-auto group-hover:block" size='sm' variant='outline' >+1 調整</Button>
                             </li>
                         )}
                     </Fragment>
@@ -58,7 +66,8 @@ const Presenter: FC<{
 
 const Ranking: FC<Props> = ({
     selected,
-    parameters
+    parameters,
+    onCalcPlus1
 }) => {
     const ranking = useQuery(api.ranking.getRanking)
     const { onChangeRankFilter, rankFilter } = useRankFilter()
@@ -90,6 +99,7 @@ const Ranking: FC<Props> = ({
 
             {selectedSpeed && ranking && (
                 <Presenter
+                    onCalcPlus1={onCalcPlus1}
                     speedRanks={speedRanks}
                     selectedSpeed={selectedSpeed}
                 />

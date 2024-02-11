@@ -31,13 +31,16 @@ export const usePokeCalc = () => {
             baseStats: pokemon.s
         }))
     }, [])
-    const onCalcTargetPlus1 = useCallback(() => {
-        const evs = calcEvs(myParams, calcSpeed(targetParams) + 1)
+    const onCalcPlus1 = useCallback((target: number) => {
+        const evs = calcEvs(myParams, target + 1)
         setMyParams(before => ({
             ...before,
             evs
         }))
-    }, [myParams, targetParams])
+    }, [myParams])
+    const onCalcTargetPlus1 = useCallback(() => {
+        onCalcPlus1(calcSpeed(targetParams))
+    }, [onCalcPlus1, targetParams])
     const onChangeTargetParams = setTargetParams
     const onChangeMyParams = setMyParams
     const targetSpeed = useMemo(() => calcSpeed(targetParams), [targetParams])
@@ -48,6 +51,7 @@ export const usePokeCalc = () => {
         onChangeTargetParams,
         onChangeMyParams,
         onCalcTargetPlus1,
+        onCalcPlus1,
         myParams,
         targetParams,
         selected,
