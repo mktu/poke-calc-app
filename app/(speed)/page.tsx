@@ -5,6 +5,7 @@ import Parameters from './_components/parameters'
 import Ranking from "./_components/ranking";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Result from "./_components/result";
+import NotFound from "@/components/parts/not-found";
 
 const SpeedPage: React.FC = () => {
   const { selected,
@@ -21,20 +22,20 @@ const SpeedPage: React.FC = () => {
     onCalcPlus1
   } = usePokeCalc()
   return (
-    <div className="flex w-full gap-2 p-4">
+    <div className="block w-full gap-2 p-4 md:flex">
       <div className="flex flex-1 flex-col justify-start">
         <div className="mb-2">
           <Result diff={mySpeed - targetSpeed} valid={Boolean(selected && target)} />
         </div>
         <PokemonSelector onSelect={onSelectMyPokemon} selected={selected} />
-        {selected && <Parameters
+        {selected ? <Parameters
           speed={mySpeed}
           onCalcTargetPlus1={onCalcTargetPlus1}
           pokemon={selected}
           parameters={myParams}
-          onChangeParam={onChangeMyParams} />}
+          onChangeParam={onChangeMyParams} /> : <NotFound />}
       </div>
-      <div className="min-h-[250px] w-[1px] self-stretch bg-border" />
+      <div className="hidden min-h-[250px] w-[1px] self-stretch bg-border md:block" />
       <div className="flex-1">
         <Tabs defaultValue="vs">
           <TabsList className='grid w-full grid-cols-2'>
@@ -43,10 +44,10 @@ const SpeedPage: React.FC = () => {
           </TabsList>
           <TabsContent value='vs'>
             <PokemonSelector onSelect={onSelectTarget} selected={target} />
-            {target && <Parameters speed={targetSpeed}
+            {target ? <Parameters speed={targetSpeed}
               pokemon={target}
               parameters={targetParams}
-              onChangeParam={onChangeTargetParams} />}
+              onChangeParam={onChangeTargetParams} /> : <NotFound />}
           </TabsContent>
           <TabsContent value='ranking'>
             {selected && <Ranking onCalcPlus1={onCalcPlus1} selected={selected} parameters={myParams} />}
