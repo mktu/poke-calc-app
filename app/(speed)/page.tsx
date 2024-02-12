@@ -53,7 +53,7 @@ const SpeedPage: React.FC = () => {
               parameters={targetParams}
               onChangeParam={onChangeTargetParams} /> : <NotFound />}
           </TabsContent>
-          <TabsContent value='ranking' className="h-full flex-1 overflow-hidden">
+          <TabsContent value='ranking' className="flex-1 md:h-full md:overflow-hidden">
             {selected && <Ranking onCalcPlus1={onCalcPlus1} selected={selected} parameters={myParams} />}
           </TabsContent>
         </Tabs>
