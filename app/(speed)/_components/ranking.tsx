@@ -34,7 +34,7 @@ const Presenter: FC<{
             }
         }, [selectedSpeed])
         return (
-            <ul className="max-h-[500px] overflow-auto">
+            <ul className="h-full overflow-auto">
                 {speedRanks.map(v => (
                     <Fragment key={v.speedRank}>
                         {v.type === 'selected' ? (
@@ -82,7 +82,7 @@ const Ranking: FC<Props> = ({
         }) || []).filter(v => v.type === 'selected' || rankFilter.speedTypeFilter.includes(v.type)), [parameters, ranking, rankFilter, selected])
     const selectedSpeed = speedRanks.find(v => v.name === selected.name && v.type === 'selected')?.speed
     return (
-        <div className="relative">
+        <div className="relative h-full overflow-hidden">
             {isCollapsed ? (
                 <Button size={'icon'} variant='ghost' className="absolute right-0 top-0" onClick={() => {
                     setIsCollapsed(false)

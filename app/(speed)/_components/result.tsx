@@ -2,15 +2,17 @@ import { FC } from "react"
 
 type Props = {
     diff: number,
-    valid: boolean
+    valid: boolean,
+    isVs: boolean
 }
 
 const Result: FC<Props> = ({
     diff,
-    valid
+    valid,
+    isVs
 }) => {
-    if (!valid) {
-        return (<div className="flex h-[40px] w-full items-center justify-center rounded text-muted-foreground">
+    if (!valid || !isVs) {
+        return (<div className="hidden h-[40px] w-full items-center justify-center rounded text-muted-foreground md:flex">
             ▷▷▷ ポケモンの素早さを比較します ◁◁◁
         </div>)
     }

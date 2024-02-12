@@ -6,6 +6,7 @@ import Ranking from "./_components/ranking";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Result from "./_components/result";
 import NotFound from "@/components/parts/not-found";
+import { useState } from "react";
 
 const SpeedPage: React.FC = () => {
   const { selected,
@@ -21,11 +22,12 @@ const SpeedPage: React.FC = () => {
     onCalcTargetPlus1,
     onCalcPlus1
   } = usePokeCalc()
+  const [tab, setTab] = useState('vs')
   return (
-    <div className="block w-full gap-2 p-4 md:flex">
-      <div className="flex flex-1 flex-col justify-start">
+    <div className="block gap-2 p-4 md:flex md:size-full">
+      <div className="flex-1 md:overflow-hidden">
         <div className="mb-2">
-          <Result diff={mySpeed - targetSpeed} valid={Boolean(selected && target)} />
+          <Result isVs={tab === 'vs'} diff={mySpeed - targetSpeed} valid={Boolean(selected && target)} />
         </div>
         <PokemonSelector onSelect={onSelectMyPokemon} selected={selected} />
         {selected ? <Parameters
@@ -35,9 +37,11 @@ const SpeedPage: React.FC = () => {
           parameters={myParams}
           onChangeParam={onChangeMyParams} /> : <NotFound />}
       </div>
-      <div className="hidden min-h-[250px] w-[1px] self-stretch bg-border md:block" />
-      <div className="flex-1">
-        <Tabs defaultValue="vs">
+      <div className="hidden w-[1px] bg-border md:block" />
+      <div className="size-full flex-1 md:overflow-hidden">
+        <Tabs className="flex h-full flex-col" value={tab} onValueChange={(tab) => {
+          setTab(tab)
+        }}>
           <TabsList className='grid w-full grid-cols-2'>
             <TabsTrigger value='vs'>相手のポケモンを指定</TabsTrigger>
             <TabsTrigger value='ranking'>使用率上位と比較</TabsTrigger>
@@ -49,7 +53,7 @@ const SpeedPage: React.FC = () => {
               parameters={targetParams}
               onChangeParam={onChangeTargetParams} /> : <NotFound />}
           </TabsContent>
-          <TabsContent value='ranking'>
+          <TabsContent value='ranking' className="h-full flex-1 overflow-hidden">
             {selected && <Ranking onCalcPlus1={onCalcPlus1} selected={selected} parameters={myParams} />}
           </TabsContent>
         </Tabs>

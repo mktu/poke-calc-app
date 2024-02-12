@@ -1,3 +1,4 @@
+import Footer from './_components/footer';
 import Header from './_components/header'
 
 type Props = {
@@ -5,12 +6,13 @@ type Props = {
 }
 
 const Layout: React.FC<Props> = ({ children }) => (
-    <>
+    <div className='flex h-screen w-full flex-col'>
         <Header />
-        <main className="w-full">
+        <main className="flex-1 md:size-full md:overflow-hidden">
             {children}
         </main>
-    </>
+        <Footer />
+    </div>
 )
 
 export default Layout
