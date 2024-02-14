@@ -2,7 +2,7 @@ import { api } from "@/convex/_generated/api";
 import { linkRankToPokemon } from "@/logics/rank";
 import { ConvexHttpClient } from "convex/browser";
 import { FC } from "react";
-import Ranks from "./_components/ranks";
+import RankList from "./_components/rank-list";
 
 if (!process.env["NEXT_PUBLIC_CONVEX_URL"]) {
     console.error('env variables is not defined for convex')
@@ -14,7 +14,7 @@ const Page: FC = async () => {
     const ranking = linkRankToPokemon(pokemons, await client.query(api.ranking.getRanking))
     return (
         <div>
-            <Ranks pokemons={pokemons} ranking={ranking} />
+            <RankList pokemons={pokemons} ranking={ranking} />
         </div>
     )
 }

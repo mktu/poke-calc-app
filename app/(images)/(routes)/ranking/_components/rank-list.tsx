@@ -12,7 +12,7 @@ type Props = {
     ranking: Doc<'ranking'>[],
 }
 
-const Ranks: FC<Props> = ({
+const RankList: FC<Props> = ({
     pokemons,
     ranking
 }) => {
@@ -60,6 +60,6 @@ const Ranks: FC<Props> = ({
     )
 }
 
-export default Ranks
+export default RankList
 
 
