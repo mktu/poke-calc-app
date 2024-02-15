@@ -31,7 +31,7 @@ const PokemonSelector: FC<Props> = ({
     return (
         <Command onKeyDown={handleKeyDown} value={selected?._id} shouldFilter={false} className='overflow-visible'>
             <label className="text-sm text-muted-foreground">ポケモン</label>
-            <CommandInput value={inputText} ref={inputRef} placeholder='ポケモンを検索' onValueChange={(text) => {
+            <CommandInput className="text-base md:text-sm" value={inputText} ref={inputRef} placeholder='ポケモンを検索' onValueChange={(text) => {
                 onInputChange(text)
                 if (selected) {
                     onSelect(null)
