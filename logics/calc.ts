@@ -58,8 +58,8 @@ export const calcSpeed = ({
     const equipmentCorrection = weatherCorrection * tailWondCorrection * scarfCorrection;
     const natureCorretion = nature === 'up' ? 1.1 : nature === 'down' ? 0.9 : 1.0
     const correctionRank = rankCorrectionFactor[String(rank)]
-    return Math.floor(Math.round(Math.floor(Math.floor(((
-        baseStats * 2.0 + ivs + evs / 4.0
+    return Math.floor(Math.round(Math.floor(Math.floor(Math.floor((
+        baseStats * 2.0 + ivs + Math.floor(evs / 4.0)
     ) * (50.0 / 100.0) + 5) * natureCorretion) * correctionRank) * equipmentCorrection) * paralysisCorrection)
 }
 
