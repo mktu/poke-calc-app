@@ -25,7 +25,7 @@ const SpeedPage: React.FC = () => {
   const [tab, setTab] = useState('vs')
   return (
     <div className="block gap-2 p-4 md:flex md:size-full">
-      <div className="flex-1 md:overflow-hidden">
+      <div className="flex-1 bg-slate-50 md:overflow-hidden md:bg-transparent rounded">
         <div className="mb-2">
           <Result isVs={tab === 'vs'} diff={mySpeed - targetSpeed} valid={Boolean(selected && target)} />
         </div>
@@ -38,6 +38,11 @@ const SpeedPage: React.FC = () => {
           onChangeParam={onChangeMyParams} /> : <NotFound />}
       </div>
       <div className="hidden w-[1px] bg-border md:block" />
+      <div className='flex items-center justify-center gap-4 py-4 text-muted-foreground md:hidden'>
+        <hr className='w-full' />
+        VS
+        <hr className="w-full" />
+      </div>
       <div className="size-full flex-1 md:overflow-hidden">
         <Tabs className="flex h-full flex-col" value={tab} onValueChange={(tab) => {
           setTab(tab)
