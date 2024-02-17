@@ -8,6 +8,7 @@ import { FC, Fragment, useEffect, useMemo, useRef, useState } from "react"
 import RankFilter from "./rank-filter"
 import { Button } from "@/components/ui/button"
 import { MenuIcon } from "lucide-react"
+import { checkIsTouch } from "@/lib/utils"
 
 type Props = {
     selected: Doc<'pokemon'>,
@@ -26,7 +27,7 @@ const Presenter: FC<{
 }) => {
         const selectedRef = useRef<HTMLLIElement>(null)
         useEffect(() => {
-            if (selectedRef.current) {
+            if (selectedRef.current && !checkIsTouch()) {
                 selectedRef.current.scrollIntoView({
                     behavior: 'smooth',
                     block: 'center'
