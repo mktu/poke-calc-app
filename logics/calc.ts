@@ -5,9 +5,9 @@ export type SpeedParams = {
     paralysis: boolean,
     tailwind: boolean,
     weather: boolean,
-    evs: number, //努力値
+    evs?: number, //努力値
     ivs: number, // 個体値,
-    rank: number,
+    rank?: number,
     baseStats: number,
     nature: 'up' | 'down' | 'none'
 }
@@ -45,11 +45,11 @@ export const calcSpeed = ({
     paralysis,
     tailwind,
     weather,
-    evs,
+    evs = 0,
     ivs,
     baseStats,
     nature,
-    rank
+    rank = 0
 }: SpeedParams) => {
     const weatherCorrection = weather ? 8192.0 / 4096 : 1.0;
     const tailWondCorrection = tailwind ? 8192.0 / 4096 : 1.0;
@@ -72,7 +72,7 @@ export const calcEvs = (prm: SpeedParams, targetSpeed: number): number => {
         ivs,
         baseStats,
         nature,
-        rank
+        rank = 0
     } = prm;
     const weatherCorrection = weather ? 8192.0 / 4096 : 1.0;
     const tailWondCorrection = tailwind ? 8192.0 / 4096 : 1.0;

@@ -67,10 +67,15 @@ const Parameters: FC<Props> = ({
             <div className="flex items-end gap-1">
                 <div>
                     <label className='text-sm text-muted-foreground' htmlFor="evs">努力値</label>
-                    <Input className="w-auto" id='evs' type='number' min={0} max={252} value={parameters.evs} onChange={(e) => {
-                        const num = Number(e.target.value)
-                        onChangeParam({ ...parameters, evs: num })
-                    }} />
+                    <Input className="w-auto" id='evs' type='number' min={0} max={252} value={parameters.evs !== undefined ? parameters.evs : ''}
+                        onChange={(e) => {
+                            if (!e.target.value) {
+                                onChangeParam({ ...parameters, evs: undefined })
+                                return
+                            }
+                            const num = Number(e.target.value)
+                            onChangeParam({ ...parameters, evs: num })
+                        }} />
                 </div>
                 <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, evs: 0 })}>
                     0
@@ -105,18 +110,22 @@ const Parameters: FC<Props> = ({
             <div className="flex items-end gap-1">
                 <div>
                     <label className='text-sm text-muted-foreground' htmlFor="rank">補正ランク</label>
-                    <Input className="w-auto" id='rank' type='number' max={6} min={-6} value={parameters.rank} onChange={(e) => {
+                    <Input className="w-auto" id='rank' type='number' max={6} min={-6} value={parameters.rank !== undefined ? parameters.rank : ''} onChange={(e) => {
+                        if (!e.target.value) {
+                            onChangeParam({ ...parameters, rank: undefined })
+                            return
+                        }
                         const num = Number(e.target.value)
                         onChangeParam({ ...parameters, rank: num })
                     }} />
                 </div>
-                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: Math.max(parameters.rank - 1, -6) })}>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: Math.max(parameters.rank || 0 - 1, -6) })}>
                     <MinusIcon className="size-4" />
                 </Button>
                 <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: 0 })}>
                     0
                 </Button>
-                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: Math.min(parameters.rank + 1, 6) })}>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: Math.min(parameters.rank || 0 + 1, 6) })}>
                     <PlusIcon className="size-4" />
                 </Button>
 
