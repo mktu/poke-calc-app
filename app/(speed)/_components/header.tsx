@@ -17,11 +17,13 @@ const Header: FC = () => {
                 <Speed className="size-8" />
                 <p className={font.className}>ポケモン素早さ比較</p>
             </div>
-            <div className="ml-auto flex items-center gap-2">
-                <Button variant={'link'} asChild className="text-muted-foreground">
-                    <Link href='/ranking' >ランキング設定</Link>
-                </Button>
-            </div>
+            {process.env["NEXT_PUBLIC_SHOW_RANKING"] && (
+                <div className="ml-auto flex items-center gap-2">
+                    <Button variant={'link'} asChild className="text-muted-foreground">
+                        <Link href='/ranking' >ランキング設定</Link>
+                    </Button>
+                </div>
+            )}
         </header>
     )
 }

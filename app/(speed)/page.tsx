@@ -25,7 +25,7 @@ const SpeedPage: React.FC = () => {
   const [tab, setTab] = useState('vs')
   return (
     <div className="block gap-2 p-4 md:flex md:size-full">
-      <div className="flex-1 bg-slate-50 md:overflow-hidden md:bg-transparent rounded">
+      <div className="flex-1 rounded bg-slate-50 md:overflow-hidden md:bg-transparent">
         <div className="mb-2">
           <Result isVs={tab === 'vs'} diff={mySpeed - targetSpeed} valid={Boolean(selected && target)} />
         </div>
