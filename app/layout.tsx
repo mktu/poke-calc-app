@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "ポケモン素早さ比較",
   description: "ポケモンの素早さを比較します（SVに対応）",
   openGraph: {
-    images: ['/api/ogp'],
+    images: [process.env['OGP_PATH'] || ''],
     title: 'ポケモン素早さ比較'
   }
 };
