@@ -10,7 +10,7 @@ const Footer: FC = () => (
             </ul>
         </div>
         <hr />
-        <div className='flex items-center justify-center p-4 text-muted-foreground'>
+        <div className='mb-[40px] flex items-center justify-center p-4 text-muted-foreground md:mb-0'>
             <span className='mr-1'>©︎</span>
             <a href={'https://twitter.com/mktu13'} target='_blank' rel='noopener noreferrer'>mktu 2024</a>
         </div>

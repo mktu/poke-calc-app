@@ -26,7 +26,7 @@ const SpeedPage: React.FC = () => {
   return (
     <div className="block gap-2 p-4 md:flex md:size-full">
       <div className="flex-1 rounded bg-slate-50 md:overflow-hidden md:bg-transparent">
-        <div className="mb-2">
+        <div className="mb-2 hidden md:block">
           <Result isVs={tab === 'vs'} diff={mySpeed - targetSpeed} valid={Boolean(selected && target)} />
         </div>
         <PokemonSelector onSelect={onSelectMyPokemon} selected={selected} />
@@ -62,6 +62,9 @@ const SpeedPage: React.FC = () => {
             {selected && <Ranking onCalcPlus1={onCalcPlus1} selected={selected} parameters={myParams} />}
           </TabsContent>
         </Tabs>
+      </div>
+      <div className="fixed bottom-0 left-0 w-full md:hidden">
+        <Result isVs={tab === 'vs'} diff={mySpeed - targetSpeed} valid={Boolean(selected && target)} />
       </div>
     </div>
   )
