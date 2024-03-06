@@ -119,13 +119,13 @@ const Parameters: FC<Props> = ({
                         onChangeParam({ ...parameters, rank: num })
                     }} />
                 </div>
-                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: Math.max(parameters.rank || 0 - 1, -6) })}>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: Math.max((parameters.rank || 0) - 1, -6) })}>
                     <MinusIcon className="size-4" />
                 </Button>
                 <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: 0 })}>
                     0
                 </Button>
-                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: Math.min(parameters.rank || 0 + 1, 6) })}>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, rank: Math.min((parameters.rank || 0) + 1, 6) })}>
                     <PlusIcon className="size-4" />
                 </Button>
 
