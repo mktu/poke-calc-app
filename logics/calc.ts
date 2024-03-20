@@ -6,7 +6,7 @@ export type SpeedParams = {
     tailwind: boolean,
     weather: boolean,
     evs?: number, //努力値
-    ivs: number, // 個体値,
+    ivs?: number, // 個体値,
     rank?: number,
     baseStats: number,
     nature: 'up' | 'down' | 'none'
@@ -46,7 +46,7 @@ export const calcSpeed = ({
     tailwind,
     weather,
     evs = 0,
-    ivs,
+    ivs = 31,
     baseStats,
     nature,
     rank = 0
@@ -69,7 +69,7 @@ export const calcEvs = (prm: SpeedParams, targetSpeed: number): number => {
         paralysis,
         tailwind,
         weather,
-        ivs,
+        ivs = 31,
         baseStats,
         nature,
         rank = 0

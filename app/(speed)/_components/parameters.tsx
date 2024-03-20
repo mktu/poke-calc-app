@@ -97,6 +97,32 @@ const Parameters: FC<Props> = ({
                 )}
 
             </div>
+            <div className="flex items-end gap-1">
+                <div>
+                    <label className='text-sm text-muted-foreground' htmlFor="ivs">個体値</label>
+                    <Input className="w-auto" id='ivs' type='number' min={0} max={31} value={parameters.ivs !== undefined ? parameters.ivs : ''}
+                        onChange={(e) => {
+                            if (!e.target.value) {
+                                onChangeParam({ ...parameters, ivs: undefined })
+                                return
+                            }
+                            const num = Number(e.target.value)
+                            onChangeParam({ ...parameters, ivs: num })
+                        }} />
+                </div>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, ivs: 0 })}>
+                    0
+                </Button>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, ivs: (parameters.ivs || 31) - 1 })}>
+                    <MinusIcon className="size-4" />
+                </Button>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, ivs: (parameters.ivs || 31) + 1 })}>
+                    <PlusIcon className="size-4" />
+                </Button>
+                <Button variant='outline' size='icon' onClick={() => onChangeParam({ ...parameters, ivs: 31 })}>
+                    31
+                </Button>
+            </div>
             <div>
                 <label className="text-sm text-muted-foreground" htmlFor="nature">性格補正</label>
                 <ToggleGroup className="justify-start" id='nature' value={parameters.nature} type="single" onValueChange={(value) => {
