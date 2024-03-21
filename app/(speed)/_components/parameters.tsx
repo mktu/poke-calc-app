@@ -49,7 +49,7 @@ const Parameters: FC<Props> = ({
     const paramsOnlyEvs: SpeedParams = { ...parameters, scarf: false, paralysis: false, tailwind: false, weather: false, rank: 0, nature: 'none' }
     const speedOnlyEvs = calcSpeed(paramsOnlyEvs)
     return (
-        <div className="flex w-full flex-col gap-4 p-2">
+        <div className="flex size-full flex-col gap-4 overflow-auto p-2">
             <div className="flex items-center gap-4">
                 <div className='text-muted-foreground'>種族値: {pokemon.s}</div>
                 <div className='text-muted-foreground'>実数値: {speed}</div>

@@ -25,7 +25,7 @@ const SpeedPage: React.FC = () => {
   const [tab, setTab] = useState('vs')
   return (
     <div className="block gap-2 p-4 md:flex md:size-full">
-      <div className="flex-1 rounded bg-slate-50 md:overflow-hidden md:bg-transparent">
+      <div className="flex flex-1 flex-col rounded bg-slate-50 md:overflow-hidden md:bg-transparent">
         <div className="mb-2 hidden md:block">
           <Result isVs={tab === 'vs'} diff={mySpeed - targetSpeed} valid={Boolean(selected && target)} />
         </div>
@@ -51,7 +51,7 @@ const SpeedPage: React.FC = () => {
             <TabsTrigger value='vs'>相手のポケモンを指定</TabsTrigger>
             <TabsTrigger value='ranking'>使用率上位と比較</TabsTrigger>
           </TabsList>
-          <TabsContent value='vs'>
+          <TabsContent value='vs' className="flex flex-col overflow-hidden">
             <PokemonSelector onSelect={onSelectTarget} selected={target} />
             {target ? <Parameters speed={targetSpeed}
               pokemon={target}
